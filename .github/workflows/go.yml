@@ -15,10 +15,20 @@ jobs:
         go-version: 1.13
       id: go
 
-    - name: Check out code into the Go module directory
+    - name: Check out code to a GOPATH compatible directory
       uses: actions/checkout@v1
-
-   
+      with:
+        fetch-depth: 1
+        
+        
+    - name: Test
+      run: |
+        go test -cover $(go list ./... | grep -v /vendor/)
+      env:
+        GOPATH: /home/runner/work/hello-go
 
     - name: Build
       run: go build -v ./src/hello/
+      env:
+        GOPATH: /home/runner/work/hello-go
+
