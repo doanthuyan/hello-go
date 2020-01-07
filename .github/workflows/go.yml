@@ -29,7 +29,9 @@ jobs:
       
 
     - name: Build
-      run: go run hello.go
+      run: |
+        cd src/hello
+        go run hello.go
       env:
         GOPATH: /home/runner/work/hello-go/hello-go
       
